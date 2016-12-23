@@ -9,7 +9,8 @@ before_install:
   - docker build -t eyallupu/healthcheck-webserver .
 
 after_success:
+  - echo $TRAVIS_BRANCH
   - if [ "$TRAVIS_BRANCH" == "master" ]; then
     docker login -u="$DOCKER_USERNAME" -p="$DOCKER_PASSWORD";
-    docker push eyallupu/healthcheck-webserver:latest;
+    docker push eyallupu/healthcheck-webserver;
     fi
