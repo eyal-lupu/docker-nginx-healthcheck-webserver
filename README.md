@@ -26,8 +26,8 @@ connections. This is important in a sticky session mode when we would like to al
  (HTTP status code 404)
 
 ## Switching Between Modes
-Assuming we had started the container using the command above (so the container name is my-app) switching can
-be done using the following commands
+Assuming we had started the container using the command above (so the container name is my-app)
+switching can be done using the following commands
   ```
   # offline
   docker exec -it my-app /bin/sh -c /usr/sbin/mark-offline.sh
