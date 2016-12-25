@@ -1,7 +1,5 @@
 # healthcheck-webserver
-This image features a NGINX web server with health-check support as defined by HAProxy's [httpchk][1] option.
-This is used mostly for demonstration purpose but can also be used as a proper web server by dropping the
-appropriate files in /etc/nginx/conf.d (see [nginx image][2] in docker Hub for usage of the nginx image).
+This image features a NGINX web server with health-check support as defined by HAProxy's [httpchk][1] option.  This is used mostly for demonstration purpose but can also be used as a proper web server by dropping the appropriate files in /etc/nginx/conf.d (see [nginx image][2] in docker Hub for usage of the nginx image).
 
 ## Starting a Container
 The simplest form to start a container out of this image is:
@@ -9,25 +7,19 @@ The simplest form to start a container out of this image is:
 docker run --name my-app -d -P eyallupu/healthcheck-webserver
 ```
 
-The health check URI will be /health-check exposed on the port bound to 8888. Given the command above
-the health check can be tested using the following command
+The health check URI will be /health-check exposed on the port bound to 8888. Given the command above the health check can be tested using the following command
 ```
 curl http://localhost:<port bound to 8888>/health-check
 ```
 
 ## Supported Modes
-* Online - When the server is in online mode the HAProxy load balancer will include it in the back ends
-pool and forward requests to it (HTTP status code 204).
-* Offline - An Offline server will be taken out of the HAProxy's back ends pool and requests will not be
-forwarded to it (HTTP status code 503). **This is the default start mode**
-* Drain - A server in that mode will be excluded from load balancing but will still receive persistent
-connections. This is important in a sticky session mode when we would like to allow any running sessions
- to end ('drain') before shutting down the server. This mode complies with HAProxy's [http-check][3] directive
- (HTTP status code 404)
+* Online - When the server is in online mode the HAProxy load balancer will include it in the back ends pool and forward requests to it (HTTP status code 204).
+* Offline - An Offline server will be taken out of the HAProxy's back ends pool and requests will not be forwarded to it (HTTP status code 503). **This is the default start mode**
+* Drain - A server in that mode will be excluded from load balancing but will still receive persistent connections. This is important in a sticky session mode when we would like to allow any running sessions
+ to end ('drain') before shutting down the server. This mode complies with HAProxy's [http-check][3] directive (HTTP status code 404)
 
 ## Switching Between Modes
-Assuming we had started the container using the command above (so the container name is my-app)
-switching can be done using the following commands
+Assuming we had started the container using the command above (so the container name is my-app) switching can be done using the following commands
   ```
   # offline
   docker exec -it my-app /bin/sh -c /usr/sbin/mark-offline.sh
@@ -38,8 +30,7 @@ switching can be done using the following commands
   ```
 
 ## Sample HAProxy Configuration
-If an instance of that image is providing application features an front-end HAProxy can use the /health-check
-URI using a configuration similar to the following (app-A and app-B illustrate A/B deployment)
+If an instance of that image is providing application features an front-end HAProxy can use the /health-check URI using a configuration similar to the following (app-A and app-B illustrate A/B deployment)
 ```
 backend my_app_service
   option httpchk OPTIONS /health-check
