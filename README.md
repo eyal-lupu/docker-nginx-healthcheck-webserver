@@ -22,11 +22,11 @@ curl http://localhost:<port bound to 8888>/health-check
 Assuming we had started the container using the command above (so the container name is my-app) switching can be done using the following commands
   ```
   # offline
-  docker exec -it my-app /bin/sh -c /usr/sbin/mark-offline.sh
+  docker exec -it my-app /usr/sbin/mark-offline.sh
   # online
-  docker exec -it my-app /bin/sh -c /usr/sbin/mark-online.sh
+  docker exec -it my-app /usr/sbin/mark-online.sh
   # drain
-  docker exec -it my-app /bin/sh -c /usr/sbin/mark-drain.sh
+  docker exec -it my-app /usr/sbin/mark-drain.sh
   ```
 
 ## Sample HAProxy Configuration
