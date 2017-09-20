@@ -7,9 +7,9 @@ The simplest form to start a container out of this image is:
 docker run --name my-app -d -P eyallupu/healthcheck-webserver
 ```
 
-The health check URI will be /health-check exposed on the port bound to 8888. Given the command above the health check can be tested using the following command
+The health check URI will be /health-check exposed on the port mapped to 8888. Given the command above the health check can be tested using the following command
 ```
-curl http://localhost:<port bound to 8888>/health-check
+curl http://localhost:<port mapped to 8888>/health-check
 ```
 
 ## Supported Modes
@@ -30,7 +30,7 @@ Assuming we had started the container using the command above (so the container 
   ```
 
 ## Sample HAProxy Configuration
-If an instance of that image is providing application features an front-end HAProxy can use the /health-check URI using a configuration similar to the following (app-A and app-B illustrate A/B deployment)
+If an instance of that image is providing application features a front-end HAProxy can use the /health-check URI using a configuration similar to the following (app-A and app-B illustrate A/B deployment)
 ```
 backend my_app_service
   option httpchk OPTIONS /health-check
