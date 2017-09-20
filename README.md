@@ -1,6 +1,10 @@
 # healthcheck-webserver
 This image features a NGINX web server with health-check support as defined by HAProxy's [httpchk][1] option.  This is used mostly for demonstration purpose but can also be used as a proper web server by dropping the appropriate files in /etc/nginx/conf.d (see [nginx image][2] in docker Hub for usage of the nginx image).
 
+
+   To emphasise – notice that this container demonstrates health checks issued from a 
+   frontend HAProxy and *not* Docker health checks
+
 ## Starting a Container
 The simplest form to start a container out of this image is:
 ```
@@ -22,11 +26,11 @@ curl http://localhost:<port mapped to 8888>/health-check
 Assuming we had started the container using the command above (so the container name is my-app) switching can be done using the following commands
   ```
   # offline
-  docker exec -it my-app /bin/sh -c /usr/sbin/mark-offline.sh
+  docker exec -it my-app /usr/sbin/mark-offline.sh
   # online
-  docker exec -it my-app /bin/sh -c /usr/sbin/mark-online.sh
+  docker exec -it my-app /usr/sbin/mark-online.sh
   # drain
-  docker exec -it my-app /bin/sh -c /usr/sbin/mark-drain.sh
+  docker exec -it my-app /usr/sbin/mark-drain.sh
   ```
 
 ## Sample HAProxy Configuration
